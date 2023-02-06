@@ -15,7 +15,7 @@ export class ContractService {
   signer: any;
 
   constructor() {
-    this.provider = new ethers.providers.Web3Provider(window.ethereum);
+    this.provider = new ethers.providers.Web3Provider(window.ethereum || "https://goerli.infura.io/v3/");
     this.contract = new ethers.Contract(contract_address, contract_abi, this.provider);
   }
 
@@ -36,7 +36,7 @@ export class ContractService {
   }
   
   async getGreet(): Promise<string> {
-    return await this.contract.greeting();
+    return await this.contract.posts(0);
   }
   
   async setGreet(newVal: string) {
