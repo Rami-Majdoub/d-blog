@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "DBlog": {
+      "address": "0xD7c628CB735327eab71754E66d2700D1623bCEeD",
+      "startBlock": 8445092
+    }
+  }
+}

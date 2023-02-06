@@ -1,0 +1,37 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+features:
+  - ipfsOnEthereumContracts
+dataSources:
+  - kind: ethereum
+    name: DBlog
+    network: goerli
+    source:
+      address: "0xD7c628CB735327eab71754E66d2700D1623bCEeD"
+      abi: DBlog
+      startBlock: 8445092
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - Post
+      abis:
+        - name: DBlog
+          file: ./abis/DBlog.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PostCreated(uint256,string)
+          handler: handlePostCreated
+        - event: PostDeleted(uint256)
+          handler: handlePostDeleted
+        - event: PostFlagged(uint256)
+          handler: handlePostFlagged
+        - event: PostLiked(uint256)
+          handler: handlePostLiked
+        - event: PostUpdated(uint256,string)
+          handler: handlePostUpdated
+      file: ./src/d-blog.ts

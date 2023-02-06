@@ -1,0 +1,21 @@
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Post @entity(immutable: true) {
+  id: Bytes!
+  postId: BigInt! # uint256
+  likes: BigInt! # uint256
+  flags: BigInt! # uint256
+  hidden: Boolean!
+  cid: String! # string
+  # content: Bytes # will accept posts with no content
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
