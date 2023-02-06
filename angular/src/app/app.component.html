@@ -1,14 +1,24 @@
-<h1>greeting</h1>
-<span>a web3 demo app</span><br />
-<a target="_blank" href="https://goerli.etherscan.io/address/0x5729c8c499cee8bf6857608dd12acb41a67064d2#code">check the contract</a><br /><br />
+<h1>DBlog</h1>
 
-<h2> Step 1: connect your wallet </h2>
+<h2>create post</h2>
+
 <button (click)="connect()">connect to metamask</button> {{ account }} <br />
 
-<h2> Step 2: check the stored value </h2>
-<button (click)="get()">get value</button> current value of greet: {{ currentGreetValue }} <br />
+<input [(ngModel)]="cid" placeholder="cid"> 
+<button (click)="set()">post</button><br />
 
-<h2> Step 3: change greet vaule </h2>
-<input [(ngModel)]="newGreetValue" placeholder="greet"> 
-<button (click)="set()">change value</button><br />
+<h2>posts list</h2>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">Error :(</div>
+<div *ngIf="posts">
+  <div *ngFor="let post of posts">
+    <p>{{ post.cid }}</p>
+  </div>
+</div>
+
+<h2>first post</h2>
+<div *ngIf="post">
+{{ post }}
+</div>
+
 

@@ -42,6 +42,10 @@ export class ContractService {
   async setGreet(newVal: string) {
     await this.contract.setGreeting(newVal);
   }
+  
+  async createPost(cid: string) {
+    await this.contract.createPost(cid);
+  }
 
 }
 

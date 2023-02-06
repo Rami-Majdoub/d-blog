@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContractService } from 'src/app/services/contract-service.service';
+import { Apollo, gql } from 'apollo-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,24 +8,50 @@ import { ContractService } from 'src/app/services/contract-service.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'greeter';
+  
+  posts: any[] = []
+  loading = true
+  error: any
   
   constructor(
-    public contractService_: ContractService 
+    private apollo: Apollo,
+    public contractService_: ContractService,
   ){}
+  
+  ngOnInit() {
+    this.apollo.watchQuery({
+      query: gql`{
+        posts(first: 5) {
+          id
+          postId
+          hidden
+          cid
+          likes
+          flags
+        }
+      }
+      `
+      })
+      .valueChanges.subscribe((result: any) => {
+        this.posts = result.data?.posts
+
+        fetch('https://' + this.posts[0]?.cid + '.ipfs.dweb.link/')
+		  .then((response) => response.text())
+		  .then((data) => this.post = data);
+
+        this.loading = result.loading
+        this.error = result.error
+      })
+  }
+  post: any;
   
   account = 'not connected';
   async connect(){
     this.account = await this.contractService_.connectAccount();
   }
   
-  async get(){
-    this.currentGreetValue = await this.contractService_.getGreet();
-  }
-  
-  currentGreetValue = '';
-  newGreetValue = '';
+  cid = '';
   async set(){
-    await this.contractService_.setGreet(this.newGreetValue);
+    await this.contractService_.createPost(this.cid);
   }
 }
