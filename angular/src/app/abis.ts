@@ -1,0 +1,2 @@
+export const contract_address = '0x5729c8c499cee8bf6857608dd12acb41a67064d2';
+export const contract_abi = [{"inputs":[],"name":"greeting","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_greeting","type":"string"}],"name":"setGreeting","outputs":[],"stateMutability":"nonpayable","type":"function"}];
