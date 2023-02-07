@@ -1,0 +1,25 @@
+<button mat-flat-button routerLink="../" color="accent">
+	<mat-icon>arrow_back</mat-icon>
+	All posts
+</button>
+<br>
+<div *ngIf="post">
+	<h2>Post #{{ post.postId }}</h2>
+	<markdown *ngIf="postContent">
+		{{ postContent }}
+	</markdown>
+	<!-- post actions -->
+	{{ post.likes }} Likes
+	<br>
+	<button mat-flat-button color="warn">
+		<mat-icon>favorite</mat-icon>
+		Like
+	</button>
+	&nbsp;
+	<button mat-flat-button color="accent">
+		<mat-icon>flag</mat-icon>
+		Flag
+	</button>
+</div>
+<br>
+<mat-spinner *ngIf="!post || !postContent" diameter="40"></mat-spinner>

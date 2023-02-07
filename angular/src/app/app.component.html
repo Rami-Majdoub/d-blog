@@ -1,28 +1,11 @@
+<!-- Toolbar -->
 <mat-toolbar color="primary">
   <span>DBlog</span>
 </mat-toolbar>
 
-<h2>create post</h2>
-
-<button (click)="connect()">connect to metamask</button> {{ account }} <br />
-
-<input [(ngModel)]="cid" placeholder="cid"> 
-<button (click)="set()">post</button><br />
-
-<h2>posts list</h2>
-<div *ngIf="loading">Loading...</div>
-<div *ngIf="error">Error :(</div>
-<div *ngIf="posts">
-  <div *ngFor="let post of posts">
-    <p>{{ post.cid }}</p>
-  </div>
+<div class="content" role="main">
+	<router-outlet></router-outlet>
 </div>
-
-<h2>first post</h2>
-<div *ngIf="post">
-<markdown>
-{{ post }}
-</markdown>
-</div>
-
-
+<br>
+<br>
+<br>

@@ -1,0 +1,23 @@
+<button mat-flat-button routerLink="../" color="accent">
+	<mat-icon>arrow_back</mat-icon>
+	All posts
+</button>
+<br>
+
+<h2>create post</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<mat-form-field appearance="fill">
+		<mat-label>Cid</mat-label>
+		<input matInput
+			type="text"
+			formControlName="cid"
+			minlength="59" maxlength="59">
+	</mat-form-field>
+
+	<br>
+	<br>
+
+	<button mat-raised-button color="primary" type="submit">Save</button>
+  
+</form>
