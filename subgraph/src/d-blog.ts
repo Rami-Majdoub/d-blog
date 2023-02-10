@@ -58,7 +58,7 @@ export function handlePostDeleted(event: PostDeletedEvent): void {
   let id = bigIntToBytes(event.params.postId)
   let entity = Post.load(id)
   if(!entity) return;
- 	store.remove('Post', id.toString())
+  store.remove('Post', id.toHexString())
 }
 
 export function handlePostFlagged(event: PostFlaggedEvent): void {
