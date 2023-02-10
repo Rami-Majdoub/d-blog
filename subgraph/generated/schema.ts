@@ -121,15 +121,6 @@ export class Post extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
-  get postId(): BigInt {
-    let value = this.get("postId");
-    return value!.toBigInt();
-  }
-
-  set postId(value: BigInt) {
-    this.set("postId", Value.fromBigInt(value));
-  }
-
   get likes(): BigInt {
     let value = this.get("likes");
     return value!.toBigInt();
@@ -166,30 +157,21 @@ export class Post extends Entity {
     this.set("cid", Value.fromString(value));
   }
 
-  get blockNumber(): BigInt {
-    let value = this.get("blockNumber");
+  get createdAt(): BigInt {
+    let value = this.get("createdAt");
     return value!.toBigInt();
   }
 
-  set blockNumber(value: BigInt) {
-    this.set("blockNumber", Value.fromBigInt(value));
+  set createdAt(value: BigInt) {
+    this.set("createdAt", Value.fromBigInt(value));
   }
 
-  get blockTimestamp(): BigInt {
-    let value = this.get("blockTimestamp");
+  get updatedAt(): BigInt {
+    let value = this.get("updatedAt");
     return value!.toBigInt();
   }
 
-  set blockTimestamp(value: BigInt) {
-    this.set("blockTimestamp", Value.fromBigInt(value));
-  }
-
-  get transactionHash(): Bytes {
-    let value = this.get("transactionHash");
-    return value!.toBytes();
-  }
-
-  set transactionHash(value: Bytes) {
-    this.set("transactionHash", Value.fromBytes(value));
+  set updatedAt(value: BigInt) {
+    this.set("updatedAt", Value.fromBigInt(value));
   }
 }
