@@ -3,9 +3,14 @@
 	All posts
 </button>
 &nbsp;
-<button *ngIf="post" mat-flat-button routerLink="../form/{{ post.id }}">
+<button *ngIf="post" mat-stroked-button routerLink="../form/{{ post.id }}">
 	<mat-icon>edit</mat-icon>
 	Edit
+</button>
+&nbsp;
+<button *ngIf="post" mat-stroked-button color="warn" (click)="postService.delete(post.id)">
+	<mat-icon>delete</mat-icon>
+	Delete
 </button>
 <br>
 <div *ngIf="post">
@@ -16,12 +21,12 @@
 	<!-- post actions -->
 	{{ post.likes }} Likes
 	<br>
-	<button mat-flat-button color="warn">
+	<button mat-flat-button color="warn" (click)="postService.like(post.id)">
 		<mat-icon>favorite</mat-icon>
 		Like
 	</button>
 	&nbsp;
-	<button mat-flat-button color="accent">
+	<button mat-flat-button color="accent" (click)="postService.flag(post.id)">
 		<mat-icon>flag</mat-icon>
 		Flag
 	</button>

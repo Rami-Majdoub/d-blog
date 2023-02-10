@@ -25,6 +25,22 @@ export class PostService {
     );
   }
 
+  delete(id: string){
+    return this.contractService.connectAccount().then(
+      this.contractService.contract.deletePost(id)
+    );
+  }
+
+  like(id: string){
+    return this.contractService.connectAccount().then(
+      this.contractService.contract.likePost(id)
+    );
+  }
+
+  flag(id: string){
+    return this.contractService.contract.flagPost(id);
+  }
+
   get(id: string){
     return this.apollo.watchQuery({
       query: gql `
