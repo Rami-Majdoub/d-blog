@@ -28,10 +28,12 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/simplemde-style.less"
             ],
             "scripts": [
-              "node_modules/marked/marked.min.js"
+              "node_modules/marked/marked.min.js",
+              "node_modules/simplemde-antd/dist/simplemde.min.js"
             ]
           },
           "configurations": {

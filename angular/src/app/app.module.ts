@@ -10,6 +10,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimplemdeModule } from 'ngx-simplemde';
 
 // app components
 import { PostDetailsComponent } from './components/post/post-details/post-details.component';
@@ -33,6 +34,12 @@ import { PostFormComponent } from './components/post/post-form/post-form.compone
     HttpClientModule,
     MarkdownModule.forRoot(),
     BrowserAnimationsModule,
+    SimplemdeModule.forRoot({
+      // Global options
+      options: {
+        autosave: { enabled: true, uniqueId: 'MyUniqueID' },
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
