@@ -15,7 +15,10 @@ export class ContractService {
   signer: any;
 
   constructor() {
-    this.provider = new ethers.providers.Web3Provider(window.ethereum || "https://goerli.infura.io/v3/");
+    const defaultProvider = new ethers.providers.InfuraProvider("goerli");
+    this.provider = window.ethereum ? 
+      new ethers.providers.Web3Provider(window.ethereum)
+      : defaultProvider;
     this.contract = new ethers.Contract(contract_address, contract_abi, this.provider);
   }
 
