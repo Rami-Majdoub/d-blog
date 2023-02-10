@@ -1,6 +1,8 @@
-import { store } from '@graphprotocol/graph-ts'
-import { Bytes, BigInt } from '@graphprotocol/graph-ts'
-import { ipfs } from '@graphprotocol/graph-ts'
+import { 
+  Bytes,
+  BigInt,
+  store
+} from '@graphprotocol/graph-ts'
 
 import {
   OwnershipTransferred as OwnershipTransferredEvent,
@@ -40,10 +42,6 @@ export function handlePostCreated(event: PostCreatedEvent): void {
   )
   entity.postId = event.params.postId
   entity.cid = event.params.cid
-  // studio does not suport ipfs.cat
-  // hosted service does not fetch the content
-  // entity.content = ipfs.cat(event.params.cid)
-
 
   entity.likes = BigInt.fromI32(0)
   entity.flags = BigInt.fromI32(0)
@@ -88,6 +86,5 @@ export function handlePostUpdated(event: PostUpdatedEvent): void {
   if(!entity) return;
 
   entity.cid = event.params.cid
-  // entity.content = ipfs.cat(event.params.cid)
 
 }
