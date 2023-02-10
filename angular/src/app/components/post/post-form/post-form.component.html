@@ -1,23 +1,33 @@
-<button mat-flat-button routerLink="../" color="accent">
+<button mat-flat-button routerLink="/posts" color="accent">
 	<mat-icon>arrow_back</mat-icon>
 	All posts
 </button>
 <br>
 
-<h2>create post</h2>
+<h2 *ngIf="!id">create post</h2>
+<h2 *ngIf="id">edit post # {{ id }}</h2>
+
+<mat-form-field appearance="fill">
+	<mat-label>web3.storage API Key</mat-label>
+	<input matInput
+		type="password"
+		[(ngModel)]="apikey">
+</mat-form-field>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<!--
 	<mat-form-field appearance="fill">
-		<mat-label>Cid</mat-label>
+		<mat-label>Title</mat-label>
 		<input matInput
 			type="text"
-			formControlName="cid"
-			minlength="59" maxlength="59">
+			formControlName="title"
+			minlength="3">
 	</mat-form-field>
-
-	<br>
-	<br>
-
+ -->
+	<simplemde
+		formControlName="content"
+	></simplemde>
 	<button mat-raised-button color="primary" type="submit">Save</button>
-  
+	{{ status }}
+
 </form>

@@ -7,7 +7,7 @@ import { ContractService } from 'src/app/services/contract-service.service';
   providedIn: 'root'
 })
 export class PostService {
-  
+
   constructor(
     private apollo: Apollo,
     private contractService: ContractService,
@@ -19,16 +19,17 @@ export class PostService {
     );
   }
 
+  edit({ id, cid }: Post){
+    return this.contractService.contract.updatePost(
+      id, cid
+    );
+  }
+
   get(id: string){
-    /**
-      query get($id: String) {
-        posts(where: {postId: $id}) { id postId hidden cid likes flags }
-      }
-    */
     return this.apollo.watchQuery({
       query: gql `
         query get($id: String) {
-          post(id: $id) { id postId hidden cid likes flags }
+          post(id: $id) { id hidden cid likes flags }
         }
       `,
       variables: {
@@ -40,8 +41,8 @@ export class PostService {
   getAll(){
     return this.apollo.watchQuery({
       query: gql`{
-        posts(first: 5) {
-          id postId hidden cid likes flags
+        posts(where: {hidden: false}, orderBy: createdAt, orderDirection: desc) {
+          id hidden cid likes flags createdAt
         }
       }
       `

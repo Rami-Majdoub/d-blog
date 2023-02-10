@@ -2,9 +2,14 @@
 	<mat-icon>arrow_back</mat-icon>
 	All posts
 </button>
+&nbsp;
+<button *ngIf="post" mat-flat-button routerLink="../form/{{ post.id }}">
+	<mat-icon>edit</mat-icon>
+	Edit
+</button>
 <br>
 <div *ngIf="post">
-	<h2>Post #{{ post.postId }}</h2>
+	<h2>Post #{{ post.id }}</h2>
 	<markdown *ngIf="postContent">
 		{{ postContent }}
 	</markdown>
