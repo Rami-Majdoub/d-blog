@@ -43,7 +43,6 @@ export function handlePostCreated(event: PostCreatedEvent): void {
   
   let entity = new Post(bigIntToBytes(event.params.postId))
   
-  entity.postId = event.params.postId
   entity.cid = event.params.cid
   entity.likes = BigInt.zero()
   entity.flags = BigInt.zero()
