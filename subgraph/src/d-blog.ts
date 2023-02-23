@@ -1,7 +1,8 @@
 import { 
   Bytes,
   BigInt,
-  store
+  store,
+  log
 } from '@graphprotocol/graph-ts'
 
 import {
@@ -38,11 +39,8 @@ export function handleOwnershipTransferred(
 }
 
 export function handlePostCreated(event: PostCreatedEvent): void {
-  let cid = event.params.cid;
-  if(!cid) return;
-  
   let entity = new Post(bigIntToBytes(event.params.postId))
-  
+
   entity.cid = event.params.cid
   entity.likes = BigInt.zero()
   entity.flags = BigInt.zero()
@@ -57,7 +55,12 @@ export function handlePostCreated(event: PostCreatedEvent): void {
 export function handlePostDeleted(event: PostDeletedEvent): void {
   let id = bigIntToBytes(event.params.postId)
   let entity = Post.load(id)
-  if(!entity) return;
+
+  if(!entity) {
+    log.critical("Post #{} not found", [bigIntToBytes(event.params.postId).toHexString()])
+    return;
+  }
+
   store.remove('Post', id.toHexString())
 }
 
@@ -74,7 +77,11 @@ export function handlePostFlagged(event: PostFlaggedEvent): void {
 
 export function handlePostLiked(event: PostLikedEvent): void {
   let entity = Post.load(bigIntToBytes(event.params.postId))
-  if(!entity) return;
+
+  if(!entity) {
+    log.critical("Post #{} not found", [bigIntToBytes(event.params.postId).toHexString()])
+    return;
+  }
 
   entity.likes.plus(BigInt.fromI32(1))
 
@@ -82,11 +89,12 @@ export function handlePostLiked(event: PostLikedEvent): void {
 }
 
 export function handlePostUpdated(event: PostUpdatedEvent): void {
-  let cid = event.params.cid;
-  if(!cid) return;
-  
   let entity = Post.load(bigIntToBytes(event.params.postId))
-  if(!entity) return;
+
+  if(!entity) {
+    log.critical("Post #{} not found", [bigIntToBytes(event.params.postId).toHexString()])
+    return;
+  }
 
   entity.cid = event.params.cid
   entity.updatedAt = event.block.timestamp
