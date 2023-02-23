@@ -66,9 +66,12 @@ export function handlePostDeleted(event: PostDeletedEvent): void {
 
 export function handlePostFlagged(event: PostFlaggedEvent): void {
   let entity = Post.load(bigIntToBytes(event.params.postId))
-  if(!entity) return;
-  
-  entity.flags.plus(BigInt.fromI32(1))
+  if(!entity) {
+    log.critical("Post #{} not found", [bigIntToBytes(event.params.postId).toHexString()])
+    return;
+  }
+
+  entity.flags = entity.flags.plus(BigInt.fromI32(1))
 
 	// todo: handle hide after flags reach maxFlags
 
@@ -83,7 +86,7 @@ export function handlePostLiked(event: PostLikedEvent): void {
     return;
   }
 
-  entity.likes.plus(BigInt.fromI32(1))
+  entity.likes = entity.likes.plus(BigInt.fromI32(1))
 
   entity.save()
 }
