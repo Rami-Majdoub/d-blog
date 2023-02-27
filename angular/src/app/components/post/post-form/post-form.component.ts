@@ -94,7 +94,7 @@ export class PostFormComponent implements OnInit {
       this.form.setValue({ id: data.post.id, content: "" });
 			return data;
     })
-		.then((data: any) => fetch('https://' + data?.post?.cid + '.ipfs.dweb.link/'))
+		.then((data: any) => fetch('https://' + data?.post?.cid + '.ipfs.w3s.link/'))
 		.then((response) => response.text())
 		.then((content) => this.form.controls["content"].setValue(content));// set content only
   }

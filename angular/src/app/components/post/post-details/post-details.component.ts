@@ -32,7 +32,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
         // console.log(result);
         // console.log(this.post);
 
-        fetch('https://' + this.post?.cid + '.ipfs.dweb.link/')
+        fetch('https://' + this.post?.cid + '.ipfs.w3s.link/')
           .then((response) => response.text())
           .then((data) => this.postContent = data);
 
